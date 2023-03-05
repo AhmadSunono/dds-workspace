@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-prod
+spec:
+  selector:
+    matchLabels:
+      app: nginx-prod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-prod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.7.9
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: index
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: index
+          configMap:
+            name: nginx-prod
+            items:
+              - key: nginx-production.html
+                path: index.html
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-exp
+spec:
+  selector:
+    matchLabels:
+      app: nginx-exp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-exp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.7.9
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: index
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: index
+          configMap:
+            name: nginx-exp
+            items:
+              - key: nginx-experiment.html
+                path: index.html

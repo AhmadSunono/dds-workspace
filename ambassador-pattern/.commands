@@ -1,0 +1,8 @@
+$ kubectl apply (or create) -f ambassador.yaml // Deploy pod
+$ kubectl replace -f ambassador.yaml --force // replace current pod (delete and deploy)
+$ kubectl create cm nginx-conf --from-file nginx.conf // create config map (Something like vault)
+$ kubectl get cm // Display config maps
+
+// Logging
+$ kubectl describe pod/ambassador-pattern
+$ kubectl logs ambassador-pattern [-c debug]
