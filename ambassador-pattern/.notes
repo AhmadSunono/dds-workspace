@@ -1,0 +1,4 @@
+In the article, he's using an image for debugging which didn't work, I used nginx as client application also (any app works with curl command)
+
+In the article, the config map for nginx.conf is not initialized, we need to initialize it
+kubectl create cm nginx-conf --from-file nginx.conf
