@@ -1,0 +1,16 @@
+$ kubectl apply (or create) -f ambassador.yaml // Deploy pod
+$ kubectl replace -f ambassador.yaml --force // replace current pod (delete and deploy)
+$ kubectl create cm nginx-conf --from-file nginx.conf // create config map (Something like vault)
+$ kubectl get cm // Display config maps
+
+// Logging
+$ kubectl describe pod/ambassador-pattern
+$ kubectl logs ambassador-pattern [-c debug]
+
+// Get current services
+$ kubectl get svc
+
+--- A workaround to not add the service to the API-GATEWAY:
+-- $ kubectl port-forward service/dictionary-server-service 8090:8080
+-- Where 8080 is the port of the service in the cluster
+-- 8090 is to access the service from outside: http://localhost:8090/dog
