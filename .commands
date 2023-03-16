@@ -14,3 +14,6 @@ $ kubectl get svc
 -- $ kubectl port-forward service/dictionary-server-service 8090:8080
 -- Where 8080 is the port of the service in the cluster
 -- 8090 is to access the service from outside: http://localhost:8090/dog
+
+// Create ssl
+$ kubectl create secret tls ssl --cert=server.crt --key=server.key
